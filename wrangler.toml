@@ -1,0 +1,4 @@
+name = 'dev-cache-control-limit'
+main = 'src/index.js'
+compatibility_date = '2025-06-14'
+# route = "oskar.accelerateddomains.dev/*"

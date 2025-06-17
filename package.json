@@ -1,0 +1,20 @@
+{
+	"name": "dev-cache-control-limit",
+	"version": "0.0.0",
+	"private": true,
+	"scripts": {
+		"deploy": "wrangler deploy",
+		"dev": "wrangler dev",
+		"start": "wrangler dev",
+		"test": "vitest",
+		"dev:remote": "wrangler dev --remote --host oskar.accelerateddomains.dev --ip 0.0.0.0"
+	},
+	"devDependencies": {
+		"@cloudflare/vitest-pool-workers": "^0.8.19",
+		"vitest": "~3.2.0",
+		"wrangler": "^4.20.1"
+	},
+	"dependencies": {
+		"ua-parser-js": "^2.0.3"
+	}
+}
