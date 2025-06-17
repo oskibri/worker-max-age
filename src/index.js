@@ -21,14 +21,14 @@ function getBrowser(userAgent) {
 export default {
 	async fetch(request) {
 		const browser = getBrowser(request.headers.get('user-agent'));
-		const accept = request.headers.get('accept') || undefined;
+		const accept = request.headers.get('accept') || '';
 
 		if (!accept.includes('text/html')) return fetch(request);
 		else console.log('Request is HTML doc');
 
 		const response = await caches.default.match(request) || await fetch(request);
 
-		const contentType = response.headers.get('content-type') || undefined;
+		const contentType = response.headers.get('content-type') || '';
 		if (!contentType.includes('text/html')) return response;
 
 		const newResponse = new Response(response.body, response);
