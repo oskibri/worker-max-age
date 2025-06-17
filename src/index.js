@@ -21,10 +21,9 @@ function getBrowser(userAgent) {
 export default {
 	async fetch(request) {
 		const browser = getBrowser(request.headers.get('user-agent'));
-		const accept = request.headers.get('accept') || '';
 
+		const accept = request.headers.get('accept') || '';
 		if (!accept.includes('text/html')) return fetch(request);
-		else console.log('Request is HTML doc');
 
 		const response = await caches.default.match(request) || await fetch(request);
 
@@ -32,11 +31,13 @@ export default {
 		if (!contentType.includes('text/html')) return response;
 
 		const newResponse = new Response(response.body, response);
-		const cacheControl = newResponse.headers.get('cache-control'); // old cache-control string
+		const cacheControl = newResponse.headers.get('cache-control'); // Old cache-control string
 
 		if (cacheControl && ['chrome', 'safari'].includes(browser)) {
 			const newMaxAge = 5;
 			const newCacheControl = cacheControl.replace(/max-age\s*=\s*\d+/i, `max-age=${newMaxAge}`);
+				// String.prototype.replace() returns original string if it fails
+
 			newResponse.headers.set('cache-control', newCacheControl);
 		}
 
