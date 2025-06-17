@@ -28,7 +28,7 @@ export default {
 
 		const response = await caches.default.match(request) || await fetch(request);
 
-		const contentType = response.headers.get('content-type');
+		const contentType = response.headers.get('content-type') || undefined;
 		if (!contentType.includes('text/html')) return response;
 
 		const newResponse = new Response(response.body, response);
