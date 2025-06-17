@@ -25,6 +25,7 @@ export default {
 		const accept = request.headers.get('accept') || '';
 		if (!accept.includes('text/html')) return fetch(request);
 
+		// Get response from cache, otherwise from origin
 		const response = await caches.default.match(request) || await fetch(request);
 
 		const contentType = response.headers.get('content-type') || '';
